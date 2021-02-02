@@ -1,76 +1,80 @@
-const students = [
-  {
-    name: 'Ellie',
-    house: 'Hufflepuff',
-  },
-  {
-    name: 'Holly',
-    house: 'Hufflepuff',
-  },
-  {
-    name: 'Sara',
-    house: 'Hufflepuff',
-  },
-  {
-    name: 'Dani',
-    house: 'Hufflepuff',
-  },
-  {
-    name: 'Taylor',
-    house: 'Hufflepuff',
-  },
-]
+const studentList =[];
+const studentName = document.querySelector('#studentName');
+const houses = [
+  'Gryffindor', 
+  'Hufflepuff', 
+  'Ravenclaw', 
+  'Slytherin'
+];
+const startBtn = document.querySelector('#startBtn');
+const sortBtn = document.querySelector('#sortBtn');
+
 
 const printToDom = (divId, textToPrint) => {
   const selectedDiv = document.querySelector(divId);
   selectedDiv.innerHTML = textToPrint;
 }
 
-const cardBuilder = (e) => {
+const hideForm = () => {
+  document.querySelector('#studentForm').style.display = 'none';
+};
+
+const showForm = () => {
+  document.getElementById('#studentForm').style.display = 'block';
+};
+
+const cardBuilder = (arr) => {
   let domString = ' ';
 
-  e.forEach((item, i) => {
-    domString += `<div class="card" style="width: 18rem;" id=${i}>
+  for (let i = 0; i < arr.length; i++) {
+    domString += `<div class="card" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title">${item.name}</h5>
-      <p class="card-text">${item.house}</p>
-      <a href="#" class="btn btn-danger>Expel</a>
+      <h5 class="card-title">${arr[i].name}</h5>
+      <p class="card-text">${arr[i].house}</p>
+      <a href="#" class="btn btn-danger" id=${arr[i].id}>Expel</a>
     </div>
   </div>`
-  });
+  };
 
+  printToDom('#studentList', domString);
+};
 
-  printToDom('#students', domString);
-}
 
 const formContent = (e) => {
-  e.preventDefault ();
+  e.preventDefault();
+  const nameInput = studentName.value;
+  const studentIds = studentList
+    .map((student) => student.id)
+    .sort((a, b) => a - b);
 
-  const name = document.querySelector('#name').Value;
+  const id = studentIds.length ? studentIds[studentIds.length - 1] + 1 : 1;
 
-  const obj = {
-    name,
-  }
+  if (nameInput === ``) {
+    // formAlert(); add when function is created
+  } else {
+    const newStudent = {
+      name: nameInput,
+      house: houses[Math.floor(Math.random()*houses.length)],
+      id
+      // id: `student${studentCounter}`, Do I want to add studentCounter???
+    };
 
-  students.push(obj);
-
-  cardBuilder(students);
-
-  document.querySelector('form').reset();
-}
-
-const expelStudent = (e) => {
-  // write a formula to remove student card from student record
-}
+    studentList.push(newStudent);
+    // studentCounter++; Do I want to add studentCounter???
+    cardBuilder(studentList);
+    // addDeleteEvents(); add back in when you create function
+    studentName.value = '';
+  };
+};
 
 const buttonClick = () => {
-  document.querySelector('#start-btn').addEventListener('click', 'function');
-  document.querySelector('#sort-btn').addEventListener('click', 'function');
+  document.querySelector('#startBtn').addEventListener('click', showForm);
+  document.querySelector('#sortBtn').addEventListener('click', formContent);
 }
 
 const init = () => {
   buttonClick();
-  cardBuilder(students);
+  cardBuilder(studentList);
 }
 
 init();
