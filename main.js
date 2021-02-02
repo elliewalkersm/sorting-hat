@@ -1,5 +1,4 @@
 const studentList = [];
-const studentName = document.querySelector("#studentName");
 const houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"];
 const startBtn = document.querySelector("#startBtn");
 const sortBtn = document.querySelector("#sortBtn");
@@ -26,6 +25,7 @@ const showForm = (e) => {
     </form>
   </div>`;
   }
+  document.querySelector("#sortBtn").addEventListener("click", formContent);
 };
 
 // const formAlert = () => {
@@ -58,7 +58,7 @@ const cardBuilder = (arr) => {
 
 const formContent = (e) => {
   e.preventDefault();
-  const nameInput = studentName.value;
+  const nameInput = document.querySelector('#studentName').value;
   const studentIds = studentList
     .map((student) => student.id)
     .sort((a, b) => a - b);
@@ -80,9 +80,12 @@ const formContent = (e) => {
   }
 };
 
+const expelButton = (e) => {
+
+}
+
 const buttonClick = () => {
   document.querySelector("#startBtn").addEventListener("click", showForm);
-  document.querySelector("#sortBtn").addEventListener("click", formContent);
 };
 
 const init = () => {
