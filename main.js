@@ -1,30 +1,47 @@
-const studentList =[];
-const studentName = document.querySelector('#studentName');
-const houses = [
-  'Gryffindor', 
-  'Hufflepuff', 
-  'Ravenclaw', 
-  'Slytherin'
-];
-const startBtn = document.querySelector('#startBtn');
-const sortBtn = document.querySelector('#sortBtn');
-
+const studentList = [];
+const studentName = document.querySelector("#studentName");
+const houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"];
+const startBtn = document.querySelector("#startBtn");
+const sortBtn = document.querySelector("#sortBtn");
 
 const printToDom = (divId, textToPrint) => {
   const selectedDiv = document.querySelector(divId);
   selectedDiv.innerHTML = textToPrint;
-}
-
-const hideForm = () => {
-  document.querySelector('#studentForm').style.display = 'none';
 };
 
-const showForm = () => {
-  document.getElementById('#studentForm').style.display = 'block';
+const showForm = (e) => {
+  const buttonId = e.target.id;
+
+  if (buttonId === "startBtn") {
+    document.querySelector("#studentForm").innerHTML = `<div id="studentForm">
+    <form>
+      <h1>Enter First Year's Name</h1>
+      <div class="row mb-3">
+      <label for="student-name" class="col-sm-2 col-form-label">Student:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control d-inline" id="studentName" required>
+      </div>
+      </div>
+      <button type="button" class="btn btn-secondary" id="sortBtn">Sort!</button>
+    </form>
+  </div>`;
+  }
 };
+
+// const formAlert = () => {
+//   let domString = ``;
+//   domString += 
+//     `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+//        Please enter a name
+//       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+//         <span aria-hidden="true">&times;</span>
+//       </button>
+//     </div>`;
+//   printToDom('blankFieldAlert', domString);
+// };
 
 const cardBuilder = (arr) => {
-  let domString = ' ';
+  let domString = " ";
 
   for (let i = 0; i < arr.length; i++) {
     domString += `<div class="card" style="width: 18rem;">
@@ -33,12 +50,11 @@ const cardBuilder = (arr) => {
       <p class="card-text">${arr[i].house}</p>
       <a href="#" class="btn btn-danger" id=${arr[i].id}>Expel</a>
     </div>
-  </div>`
-  };
+  </div>`;
+  }
 
-  printToDom('#studentList', domString);
+  printToDom("#studentList", domString);
 };
-
 
 const formContent = (e) => {
   e.preventDefault();
@@ -50,31 +66,28 @@ const formContent = (e) => {
   const id = studentIds.length ? studentIds[studentIds.length - 1] + 1 : 1;
 
   if (nameInput === ``) {
-    // formAlert(); add when function is created
+    formAlert();
   } else {
     const newStudent = {
       name: nameInput,
-      house: houses[Math.floor(Math.random()*houses.length)],
-      id
-      // id: `student${studentCounter}`, Do I want to add studentCounter???
+      house: houses[Math.floor(Math.random() * houses.length)],
+      id,
     };
 
     studentList.push(newStudent);
-    // studentCounter++; Do I want to add studentCounter???
     cardBuilder(studentList);
-    // addDeleteEvents(); add back in when you create function
-    studentName.value = '';
-  };
+    studentName.value = "";
+  }
 };
 
 const buttonClick = () => {
-  document.querySelector('#startBtn').addEventListener('click', showForm);
-  document.querySelector('#sortBtn').addEventListener('click', formContent);
-}
+  document.querySelector("#startBtn").addEventListener("click", showForm);
+  document.querySelector("#sortBtn").addEventListener("click", formContent);
+};
 
 const init = () => {
   buttonClick();
   cardBuilder(studentList);
-}
+};
 
 init();
