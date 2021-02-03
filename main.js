@@ -1,7 +1,5 @@
 const studentList = [];
-const houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"];
-const startBtn = document.querySelector("#startBtn");
-const sortBtn = document.querySelector("#sortBtn");
+const voldermortArmy = [];
 
 const printToDom = (divId, textToPrint) => {
   const selectedDiv = document.querySelector(divId);
@@ -30,14 +28,14 @@ const showForm = (e) => {
 
 // const formAlert = () => {
 //   let domString = ``;
-//   domString += 
+//   domString +=
 //     `<div class="alert alert-warning alert-dismissible fade show" role="alert">
 //        Please enter a name
 //       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 //         <span aria-hidden="true">&times;</span>
 //       </button>
 //     </div>`;
-//   printToDom('blankFieldAlert', domString);
+//   printToDom('formAlert', domString);
 // };
 
 const cardBuilder = (arr) => {
@@ -48,7 +46,7 @@ const cardBuilder = (arr) => {
     <div class="card-body">
       <h5 class="card-title">${arr[i].name}</h5>
       <p class="card-text">${arr[i].house}</p>
-      <a href="#" class="btn btn-danger" id=${arr[i].id}>Expel</a>
+      <button class="btn btn-danger" id=${arr[i].id} type="button">Expel</button> 
     </div>
   </div>`;
   }
@@ -58,12 +56,22 @@ const cardBuilder = (arr) => {
 
 const formContent = (e) => {
   e.preventDefault();
-  const nameInput = document.querySelector('#studentName').value;
+  const nameInput = document.querySelector("#studentName").value;
+  const houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"];
   const studentIds = studentList
     .map((student) => student.id)
     .sort((a, b) => a - b);
 
   const id = studentIds.length ? studentIds[studentIds.length - 1] + 1 : 1;
+
+  const formAlert = () => {
+    let domString = ``;
+    domString +=
+      `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+         Please enter a name
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>`;
+  };
 
   if (nameInput === ``) {
     formAlert();
@@ -73,6 +81,15 @@ const formContent = (e) => {
       house: houses[Math.floor(Math.random() * houses.length)],
       id,
     };
+    if (newStudent.house === 'Gryffindor') {
+      document.body.style.background = 'red';
+    } else if (newStudent.house === 'Hufflepuff') {
+      document.body.style.background = 'yellow';
+    } else if (newStudent.house === 'Ravenclaw') {
+      document.body.style.background = 'blue';
+    } else if (newStudent.house === 'Slytherin') {
+      document.body.style.background = 'green';
+    };
 
     studentList.push(newStudent);
     cardBuilder(studentList);
@@ -81,11 +98,36 @@ const formContent = (e) => {
 };
 
 const expelButton = (e) => {
+  const targetType = e.target.type;
+  const targetId = e.target.id;
+  if (targetType === "button") {
+    // this method returns the index of the object you are trying to remove in the array
+    const studentIndex = studentList.findIndex(student => student.id === targetId);
+    let expelled = studentList.splice(studentIndex, 1);
+    voldermortArmy.push(...expelled);
+  }
+  cardBuilder(studentList);
+  armyBuilder(voldermortArmy);
+};
 
-}
+const armyBuilder = (arr) => {
+  let domString = " ";
+
+  for (let i = 0; i < arr.length; i++) {
+    domString += `<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">${arr[i].name}</h5>
+      <p class="card-text">${arr[i].house}</p>
+    </div>
+  </div>`;
+  }
+
+  printToDom("#army", domString);
+};
 
 const buttonClick = () => {
   document.querySelector("#startBtn").addEventListener("click", showForm);
+  document.querySelector("#studentList").addEventListener('click', expelButton);
 };
 
 const init = () => {
