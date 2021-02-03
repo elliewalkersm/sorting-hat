@@ -1,13 +1,43 @@
-body {
-  background-color: cornsilk;
-}
-
 .jumbotron {
-  background-color: lightgrey;
+  width: 75%;
+  margin: auto;
+  background-color: lightslategrey;
+  color: black;
+  border: solid black 2px;
+}
+
+#startBtn {
+  margin: 10px 290px;
+}
+
+.Gryffindor {
+  background-color:maroon;
+  color:darkgrey;
+  border: solid black 2px;
+}
+
+.Hufflepuff {
+  background-color: darkgoldenrod;
+  border: solid black 2px;
 }
 
 
-.student-form {
+.Ravenclaw {
+  background-color: midnightblue;
+  color:darkgrey;
+  border: solid black 2px;
+}
+
+.Slytherin {
+  background-color: darkgreen;
+  border: solid black 2px;
+}
+
+form {
   border: solid 2px black;
-  margin: 100px;
+  width: 75%;
+  margin: auto;
+  margin-bottom: 20px;
+  background-color:white;
+  color: black
 }

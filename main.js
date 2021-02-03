@@ -12,7 +12,7 @@ const showForm = (e) => {
   if (buttonId === "startBtn") {
     document.querySelector("#studentForm").innerHTML = `<div id="studentForm">
     <form>
-      <h1>Enter First Year's Name</h1>
+      <h1 class="text-center">Enter First Year's Name</h1>
       <div class="row mb-3">
       <label for="student-name" class="col-sm-2 col-form-label">Student:</label>
       <div class="col-sm-10">
@@ -42,7 +42,7 @@ const cardBuilder = (arr) => {
   let domString = " ";
 
   for (let i = 0; i < arr.length; i++) {
-    domString += `<div class="card" style="width: 18rem;">
+    domString += `<div class="card ${arr[i].house}" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title">${arr[i].name}</h5>
       <p class="card-text">${arr[i].house}</p>
@@ -81,16 +81,6 @@ const formContent = (e) => {
       house: houses[Math.floor(Math.random() * houses.length)],
       id,
     };
-    if (newStudent.house === 'Gryffindor') {
-      document.body.style.background = 'red';
-    } else if (newStudent.house === 'Hufflepuff') {
-      document.body.style.background = 'yellow';
-    } else if (newStudent.house === 'Ravenclaw') {
-      document.body.style.background = 'blue';
-    } else if (newStudent.house === 'Slytherin') {
-      document.body.style.background = 'green';
-    };
-
     studentList.push(newStudent);
     cardBuilder(studentList);
     studentName.value = "";
