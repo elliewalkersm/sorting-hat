@@ -26,17 +26,17 @@ const showForm = (e) => {
   document.querySelector("#sortBtn").addEventListener("click", formContent);
 };
 
-// const formAlert = () => {
-//   let domString = ``;
-//   domString +=
-//     `<div class="alert alert-warning alert-dismissible fade show" role="alert">
-//        Please enter a name
-//       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-//         <span aria-hidden="true">&times;</span>
-//       </button>
-//     </div>`;
-//   printToDom('formAlert', domString);
-// };
+const formAlert = () => {
+  let domString = ``;
+  domString +=
+    `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+       Please enter a name
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>`;
+  printToDom('#studentName', domString);
+};
 
 const cardBuilder = (arr) => {
   let domString = " ";
@@ -64,14 +64,14 @@ const formContent = (e) => {
 
   const id = studentIds.length ? studentIds[studentIds.length - 1] + 1 : 1;
 
-  const formAlert = () => {
-    let domString = ``;
-    domString +=
-      `<div class="alert alert-warning alert-dismissible fade show" role="alert">
-         Please enter a name
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>`;
-  };
+  // const formAlert = () => {
+  //   let domString = ``;
+  //   domString +=
+  //     `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  //        Please enter a name
+  //       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  //     </div>`;
+  // };
 
   if (nameInput === ``) {
     formAlert();
