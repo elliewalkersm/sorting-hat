@@ -6,19 +6,21 @@
   border: solid black 2px;
 }
 
-#startBtn {
-  margin: 10px 290px;
+startBtn {
+  align-self: center;
 }
 
 .Gryffindor {
   background-color:maroon;
   color:darkgrey;
   border: solid black 2px;
+  margin-bottom: 10px;
 }
 
 .Hufflepuff {
   background-color: darkgoldenrod;
   border: solid black 2px;
+  margin-bottom: 10px;
 }
 
 
@@ -26,11 +28,13 @@
   background-color: midnightblue;
   color:darkgrey;
   border: solid black 2px;
+  margin-bottom: 10px;
 }
 
 .Slytherin {
   background-color: darkgreen;
   border: solid black 2px;
+  margin-bottom: 10px;
 }
 
 form {
