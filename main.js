@@ -79,12 +79,14 @@ const formContent = (e) => {
 
 const expelButton = (e) => {
   const targetType = e.target.type;
-  const targetId = e.target.id;
+  const targetId = Number(e.target.id);
   if (targetType === "button") {
     // this method returns the index of the object you are trying to remove in the array
+    console.log(typeof targetId);
     const studentIndex = studentList.findIndex(student => student.id === targetId);
     let expelled = studentList.splice(studentIndex, 1);
     voldermortArmy.push(...expelled);
+    console.log(studentIndex);
   }
   cardBuilder(studentList);
   armyBuilder(voldermortArmy);
